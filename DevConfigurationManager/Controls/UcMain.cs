@@ -225,7 +225,7 @@ namespace DeveloperConfigurationManager.Controls
 			using (var ofd = new OpenFileDialog())
 			{
 				var programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
-				if (StringExtensions.IsNullOrEmpty(programFiles))
+				if (programFiles.IsNullOrEmpty())
 					programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
 				if (System.IO.Directory.Exists(programFiles))
 				{
@@ -287,69 +287,7 @@ namespace DeveloperConfigurationManager.Controls
 			}
 		}
 
-		async void BtnRunClick(object sender, EventArgs e)
-		{
-			//if (_cts != null) return;
-			//tpDashboard.Enabled = false;
-
-			//using (_cts = new CancellationTokenSource())
-			//{
-
-
-			//	if (ckStopIIS.Checked)
-			//	{
-			//		tslStatus.Text = "Stopping IIS";
-			//		var streams = Domain.Adapters.IIS.ResetStop(_cts.Token);
-			//		await streams.AwaitAsync();
-			//		tslStatus.Text = "Stopped IIS";
-			//	}
-
-			//	var step2 = new Dictionary<Func<Task>, bool>
-			//	{
-			//		{ () => _ucIIS.Clean(), ckCleanAsp.Checked },
-			//		{ () => _ucJunction.CleanBin(), this.ckCleanJunctionEnabled.Checked && (rbBin.Checked || rbBoth.Checked) },
-			//		{ () => _ucJunction.CleanObj(), this.ckCleanJunctionEnabled.Checked && (rbObj.Checked || rbBoth.Checked) },
-			//	};
-
-			//	tslStatus.Text = "Step 2 Starting";
-			//	await Task.Run(
-			//		() =>
-			//		{
-			//			foreach (var item in step2.Keys.Where(k => step2[k]))
-			//			{
-			//				item().Wait(_cts.Token);
-			//			}
-			//		},
-			//		_cts.Token);
-			//	tslStatus.Text = "Step 2 finished";
-
-			//	if (ckMsBuild.Checked)
-			//	{
-			//		tslStatus.Text = "Running MsBuild";
-
-			//		_cancellationTokens.Add(_cts);
-			//		await Task.Run(() => _ucMsBuild.RunMsBuild(_cts.Token), _cts.Token);
-			//		_cancellationTokens.Remove(_cts);
-
-
-			//		tslStatus.Text = "MsBuild finished";
-			//	}
-			//	if (ckStartIis.Checked)
-			//	{
-			//		tslStatus.Text = "StartingIIS";
-			//		await _ucIIS.StartIis();
-			//		tslStatus.Text = "Finished Starting IIS";
-			//	}
-			//}
-
-			//tpDashboard.Enabled = true;
-			//tslStatus.Text = "Finished automation";
-		}
-
-		void CheckBox1CheckedChanged(object sender, EventArgs e)
-		{
-			grpCleanJunction.Enabled = this.ckCleanJunctionEnabled.Checked;
-		}
+	
 
 		void AtlassianLoginToolStripMenuItemClick(object sender, EventArgs e)
 		{
@@ -398,7 +336,16 @@ namespace DeveloperConfigurationManager.Controls
 
 		private void BtnRConClick(object sender, EventArgs e)
 		{
-			RCmd.Prompt(cmbServer.Text);
+		    try
+		    {
+                RCmd.Prompt(cmbServer.Text);
+		    }
+		    catch (Exception ex)
+		    {
+
+		        MessageBox.Show(this, ex.ToString());
+		    }
+			
 		}
 
 		private void WhereAmIToolStripMenuItemClick(object sender, EventArgs e)
