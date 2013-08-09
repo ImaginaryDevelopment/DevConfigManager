@@ -11,7 +11,7 @@
     <AssemblyName>DeveloperConfigurationManager</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <SccProjectName>SAK</SccProjectName>
@@ -19,9 +19,9 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
-    <PublishUrl>publish\</PublishUrl>
+    <PublishUrl>..\publish\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
+    <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
@@ -29,7 +29,10 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>123</ApplicationRevision>
+    <InstallUrl>http://imaginarydevelopment.github.io/DevConfigManager/publish/</InstallUrl>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>126</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -59,10 +62,14 @@
     <SignAssembly>true</SignAssembly>
     <SignManifests>true</SignManifests>
     <GenerateManifests>true</GenerateManifests>
-    <PublishUrl></PublishUrl>
-    <UpdateUrl></UpdateUrl>
-    <ManifestKeyFile></ManifestKeyFile>
-    <AssemblyOriginatorKeyFile></AssemblyOriginatorKeyFile>
+    <PublishUrl>
+    </PublishUrl>
+    <UpdateUrl>
+    </UpdateUrl>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
     <ManifestCertificateThumbprint>1418F8B289EAF5B5054006692AE274346CFB5FA3</ManifestCertificateThumbprint>
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\DebugSigned\</OutputPath>
@@ -363,19 +370,19 @@
     <PublishFile Include="Domain.WebAdministration">
       <Visible>False</Visible>
       <Group>Domain.WebAdministration</Group>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Microsoft.Web.Administration">
       <Visible>False</Visible>
       <Group>Domain.WebAdministration</Group>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>
