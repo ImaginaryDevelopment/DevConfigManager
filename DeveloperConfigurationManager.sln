@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationManager", "PayspanConfigurationManager\ConfigurationManager.csproj", "{364D302B-4095-4C17-A927-4B04A12040C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationManager", "DevConfigurationManager\ConfigurationManager.csproj", "{364D302B-4095-4C17-A927-4B04A12040C9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{F5D80195-055A-4599-AD20-0926040C82F0}"
 EndProject

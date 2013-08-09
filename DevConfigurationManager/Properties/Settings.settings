@@ -1,0 +1,52 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DeveloperConfigurationManager.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="JunctionTarget" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Projects\</Value>
+    </Setting>
+    <Setting Name="GitPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files (x86)\Git\cmd\git.exe</Value>
+    </Setting>
+    <Setting Name="Servers" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Databases" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Tables" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Junctions" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="AtlassianUserName" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="AtlassianPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConfigXmlUris" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CrucibleAuthority" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="StashAuthority" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Links" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;Confluence, http://confluence/&lt;/string&gt;
+  &lt;string&gt;Jira, http://jira/secure/Dashboard.jspa/&lt;/string&gt;
+  &lt;string&gt;Crucible, http://crucible:8060/&lt;/string&gt;
+  &lt;string&gt;Stash, http://stash:7990/&lt;/string&gt;
+  &lt;string&gt;Sonar, http://localhost:9000/&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="JunctionRelativeGitPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">LOANQUEST ORIGINATION</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
