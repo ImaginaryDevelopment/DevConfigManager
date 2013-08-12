@@ -25,8 +25,9 @@ namespace DeveloperConfigurationManager.Controls
 		readonly AccessorHelper<string> _atlassianUserNameAccessor;
 
 		readonly AccessorHelper<string> _atlassianPasswordAccessor;
+        private readonly IDictionary<Type,Lazy<Control>> _dynamicChildren;
 
-		readonly Profiler _profiler;
+        readonly Profiler _profiler;
 
 		public event EventHandler ExitRequest
 		{
@@ -48,7 +49,8 @@ namespace DeveloperConfigurationManager.Controls
 			AccessorHelper<string> atlassianUserNameAccessor,
 			AccessorHelper<string> atlassianPasswordAccessor,
 			IEnumerable<Control> children,
-			Profiler profiler,
+            IDictionary<Type,Lazy<Control>> dynamicChildren,
+            Profiler profiler,
             // ReSharper disable once ParameterTypeCanBeEnumerable.Local
 			IDictionary<string, Uri> links)
 		{
@@ -65,7 +67,8 @@ namespace DeveloperConfigurationManager.Controls
 
 			this._atlassianUserNameAccessor = atlassianUserNameAccessor;
 			this._atlassianPasswordAccessor = atlassianPasswordAccessor;
-			_profiler = profiler;
+		    _dynamicChildren = dynamicChildren;
+		    _profiler = profiler;
 
 			InitializeServerStoreMenu(servers);
 			InitializeJunctionStoreMenu(junctions);
@@ -395,7 +398,9 @@ namespace DeveloperConfigurationManager.Controls
 
         private void envDteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            var control=_dynamicChildren[typeof (UcEnvDte)];
+            AddTabPage(control.Value);
+            
         }
 
 	}

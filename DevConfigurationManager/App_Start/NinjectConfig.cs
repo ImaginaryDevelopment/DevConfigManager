@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Configuration;
@@ -97,7 +98,11 @@ namespace DeveloperConfigurationManager
 					Kernel.Get<UcCrucible>()
 					
 				})
-				.WithConstructorArgument("links", Settings.Default.GetLinks());
+				.WithConstructorArgument("links", Settings.Default.GetLinks())
+                .WithConstructorArgument("dynamicChildren", new Dictionary<Type,Lazy<Control>>
+                {
+                    {(typeof(UcEnvDte)),new Lazy<Control>(()=> Kernel.Get<UcEnvDte>())}
+                });
 		}
 
         /// <summary>
