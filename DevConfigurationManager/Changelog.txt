@@ -1,0 +1,33 @@
+﻿2013.01.03.1 added hot new icon
+2013.01.03.0 fix for stash tab misleading data
+2013.01.02.3 hotfix for comment link regression #2
+2013.01.02.2 hotfix for multiple tabpages on crucible
+	hotfix for comment link regression
+2013.01.02.1 added profiling capabilities
+	moved even more parts of stash and crucible off ui thread
+2013.01.02.0 adjustments to iis tab layout
+	moved more parts of stash and crucible off ui thread
+2012.12.31.2 fixed case sensitive comparisons in crucible ReviewData
+	fixed case sensitive comparisons in stash
+2012.12.31.1 no mef, just dynamic loaded click once assemblies
+2012.12.31.0 attempt to bring back some Mef into the main branch
+2012.12.28.5 moved web admin dependency to a MEF component
+2012.12.28.4 partial move of crucible link behavior
+	added web admin dll to copy local
+2012.12.28.3 crucible comments now provide links on the comments tab
+2012.12.28.2 made the crucible comments and reviews switch to their tab upon population
+	added comment counts and unread comment counts to the reviews tab
+2012.12.28.1 exposed missing credentials warnings in the UI
+2012.12.28.0 fix for crucible review links
+2012.12.27.2 added user-level coloring/details to pull requests and code reviews
+2012.12.27.1 removed non-functional application enable/disable from iis context menu
+	fixed deadlocks on database tab
+	service tab can be filtered by other columns
+	iis tab can now attempt to verify physical paths exist for servers
+2012.12.27.0 enabled iis app pool management via context menus
+2012.12.20.0 massive refactoring towards ninject
+	improved stability and bug fixes for database tab
+	removed tons of clutter from ucServices, improved button disable/enabling
+2012.12.11.2 added git => .bashrc link
+2012.12.11.1 added a changelog
+2012.12.11.0 implemented a default sort order on crucible tabs

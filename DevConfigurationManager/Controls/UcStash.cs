@@ -47,13 +47,17 @@ return uris;
 			if (hasStoredCredentials()) label1.Visible = false;
 			var uris = GetStashes(this._stashAuthority);
 
-			richTextBox1.AppendText("Using the following repositories"+Environment.NewLine);
-			richTextBox1.AppendText(uris.Select(u => u.Key + ":" + u.Value).Delimit(Environment.NewLine),Color.Blue);
-			richTextBox1.AppendText(Environment.NewLine);
-			cbName.DataSource = uris.ToArray();
-			cbName.DisplayMember = "Key";
-			cbName.ValueMember = "Value";
-			cbName.SelectedIndex = 0;
+			if (uris.Any())
+			{
+				richTextBox1.AppendText("Using the following repositories" + Environment.NewLine);
+				richTextBox1.AppendText(uris.Select(u => u.Key + ":" + u.Value).Delimit(Environment.NewLine), Color.Blue);
+				richTextBox1.AppendText(Environment.NewLine);
+				cbName.DataSource = uris.ToArray();
+				cbName.DisplayMember = "Key";
+				cbName.ValueMember = "Value";
+				cbName.SelectedIndex = 0;
+			}
+			
 		}
 
 		[Obsolete("Designer only")]
