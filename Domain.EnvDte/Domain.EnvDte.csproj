@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Dte.cs" />
     <Compile Include="ComHelper.cs" />
+    <Compile Include="DteCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

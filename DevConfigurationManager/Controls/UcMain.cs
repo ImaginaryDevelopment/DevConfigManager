@@ -33,7 +33,6 @@ namespace DeveloperConfigurationManager.Controls
 			add
 			{
 				this.exitToolStripMenuItem.Click += value;
-
 			}
 
 			remove
@@ -50,6 +49,7 @@ namespace DeveloperConfigurationManager.Controls
 			AccessorHelper<string> atlassianPasswordAccessor,
 			IEnumerable<Control> children,
 			Profiler profiler,
+            // ReSharper disable once ParameterTypeCanBeEnumerable.Local
 			IDictionary<string, Uri> links)
 		{
 			InitializeComponent();
@@ -59,25 +59,7 @@ namespace DeveloperConfigurationManager.Controls
 
 			foreach (var child in children)
 			{
-				var name = child.Name.StartsWith("Uc") ? StringExtensions.After(child.Name, "Uc") : child.Name;
-				var tp = new TabPage { Text = name };
-				tp.Controls.Add(child);
-				child.Dock = DockStyle.Fill;
-				tbGrid.TabPages.Add(tp);
-				var hasDefaultButton = child as IHaveDefault;
-				tbGrid.ImageList = imageList1;
-				if (hasDefaultButton != null)
-				{
-					tbGrid.Selected += (sender, e) =>
-						{
-							if (sender == hasDefaultButton)
-							{
-								if (AcceptButtonChangedEvent != null) AcceptButtonChangedEvent(sender, e);
-							}
-						};
-				}
-				TryInitializeIcon(tp,name, child as ICanHaveAnIcon);
-
+				AddTabPage(child);
 
 			}
 
@@ -136,6 +118,29 @@ namespace DeveloperConfigurationManager.Controls
 			}
 
 		}
+
+        void AddTabPage(Control child)
+        {
+            var name = child.Name.StartsWith("Uc") ? child.Name.After("Uc") : child.Name;
+            var tp = new TabPage { Text = name };
+            tp.Controls.Add(child);
+            child.Dock = DockStyle.Fill;
+            tbGrid.TabPages.Add(tp);
+            var hasDefaultButton = child as IHaveDefault;
+            tbGrid.ImageList = imageList1;
+            if (hasDefaultButton != null)
+            {
+                tbGrid.Selected += (sender, e) =>
+                {
+                    if (sender == hasDefaultButton)
+                    {
+                        if (AcceptButtonChangedEvent != null) AcceptButtonChangedEvent(sender, e);
+                    }
+                };
+            }
+            TryInitializeIcon(tp, name, child as ICanHaveAnIcon);
+
+        }
 
 		void TryInitializeIcon(TabPage tp, string name, ICanHaveAnIcon canHaveAnIcon)
 		{
@@ -231,10 +236,10 @@ namespace DeveloperConfigurationManager.Controls
 				{
 					ofd.InitialDirectory = programFiles;
 					var gitFolder = Path.Combine(programFiles, "Git");
-					if (System.IO.Directory.Exists(System.IO.Path.Combine(programFiles, "Git")))
+					if (Directory.Exists(System.IO.Path.Combine(programFiles, "Git")))
 					{
 						ofd.InitialDirectory = gitFolder;
-						var gitBin = System.IO.Path.Combine(gitFolder, "bin");
+						var gitBin = Path.Combine(gitFolder, "bin");
 						if (System.IO.Directory.Exists(gitBin))
 							ofd.InitialDirectory = gitBin;
 					}
@@ -243,7 +248,7 @@ namespace DeveloperConfigurationManager.Controls
 				ofd.Title = "Please locate Git.exe";
 				if (ofd.ShowDialog(this) != DialogResult.OK)
 					return;
-				path = System.IO.Path.GetFullPath(ofd.FileName);
+				path = Path.GetFullPath(ofd.FileName);
 			}
 
 			Settings.Default.GitPath = path;
@@ -372,7 +377,7 @@ namespace DeveloperConfigurationManager.Controls
 
 			var text = _profiler.Show("\t");
 
-			if (StringExtensions.IsNullOrEmpty(text))
+			if (text.IsNullOrEmpty())
 			{
 				richTextBox1.AppendText("No profiling data found");
 			}
@@ -387,6 +392,11 @@ namespace DeveloperConfigurationManager.Controls
 		{
 			showRawJsonInLogsToolStripMenuItem.Checked = !showRawJsonInLogsToolStripMenuItem.Checked;
 		}
+
+        private void envDteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
 
 	}
 }

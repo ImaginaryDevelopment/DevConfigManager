@@ -1,4 +1,4 @@
-﻿namespace PayspanConfigurationManager.Controls
+﻿namespace DeveloperConfigurationManager.Controls
 {
 	partial class UcEnvDte
 	{

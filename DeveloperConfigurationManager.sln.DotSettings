@@ -1,0 +1,23 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=233C84989F3B7A4C98448890B2D4FC5F/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=233C84989F3B7A4C98448890B2D4FC5F/LanguageName/@EntryValue">CSHARP</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=233C84989F3B7A4C98448890B2D4FC5F/SearchPattern/@EntryValue">richTextBox1.AppendText($textArguments$);}</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=233C84989F3B7A4C98448890B2D4FC5F/CustomPatternPlaceholder/=textArguments/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=233C84989F3B7A4C98448890B2D4FC5F/CustomPatternPlaceholder/=textArguments/Type/@EntryValue">ArgumentPlaceholder</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=233C84989F3B7A4C98448890B2D4FC5F/CustomPatternPlaceholder/=textArguments/Properties/=Minimal/@EntryIndexedValue">-1</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=233C84989F3B7A4C98448890B2D4FC5F/CustomPatternPlaceholder/=textArguments/Properties/=Maximal/@EntryIndexedValue">1</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=233C84989F3B7A4C98448890B2D4FC5F/IsReplacePattern/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=233C84989F3B7A4C98448890B2D4FC5F/ReplacePattern/@EntryValue">richTextBox1.AppendText($textArguments$,Color.Red);}</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=233C84989F3B7A4C98448890B2D4FC5F/Severity/@EntryValue">WARNING</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=233C84989F3B7A4C98448890B2D4FC5F/Comment/@EntryValue">writing without colored text</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=233C84989F3B7A4C98448890B2D4FC5F/ReplaceComment/@EntryValue">display in red</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4E71AF5E718337468F93961B2F68779E/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4E71AF5E718337468F93961B2F68779E/CustomPatternPlaceholder/=richText/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4E71AF5E718337468F93961B2F68779E/CustomPatternPlaceholder/=richText/Properties/=ExactType/@EntryIndexedValue">True</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4E71AF5E718337468F93961B2F68779E/CustomPatternPlaceholder/=richText/Properties/=Type/@EntryIndexedValue">System.Windows.Forms.RichTextBox</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4E71AF5E718337468F93961B2F68779E/CustomPatternPlaceholder/=richText/Type/@EntryValue">TypePlaceholder</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4E71AF5E718337468F93961B2F68779E/IsReplacePattern/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4E71AF5E718337468F93961B2F68779E/LanguageName/@EntryValue">CSHARP</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4E71AF5E718337468F93961B2F68779E/ReplacePattern/@EntryValue">$richText$.AppendText("test" + Environment.Newline)</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4E71AF5E718337468F93961B2F68779E/SearchPattern/@EntryValue">$richText$.AppendText("test")</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4E71AF5E718337468F93961B2F68779E/Severity/@EntryValue">ERROR</s:String></wpf:ResourceDictionary>

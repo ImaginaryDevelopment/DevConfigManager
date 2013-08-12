@@ -64,6 +64,8 @@
             this.tpLinks = new System.Windows.Forms.TabPage();
             this.flpLinks = new System.Windows.Forms.FlowLayoutPanel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.dynamicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.envDteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tbGrid.SuspendLayout();
@@ -93,6 +95,7 @@
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
             this.pathsToolStripMenuItem,
+            this.dynamicsToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -114,20 +117,20 @@
             // 
             this.mnuSave.Enabled = false;
             this.mnuSave.Name = "mnuSave";
-            this.mnuSave.Size = new System.Drawing.Size(123, 22);
+            this.mnuSave.Size = new System.Drawing.Size(152, 22);
             this.mnuSave.Text = "&Save";
             // 
             // mnuSaveAs
             // 
             this.mnuSaveAs.Enabled = false;
             this.mnuSaveAs.Name = "mnuSaveAs";
-            this.mnuSaveAs.Size = new System.Drawing.Size(123, 22);
+            this.mnuSaveAs.Size = new System.Drawing.Size(152, 22);
             this.mnuSaveAs.Text = "Save &As...";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             // 
             // editToolStripMenuItem
@@ -141,7 +144,7 @@
             // refreshToolStripMenuItem
             // 
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.refreshToolStripMenuItem.Text = "Refresh";
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.RefreshToolStripMenuItemClick);
             // 
@@ -366,6 +369,21 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // dynamicsToolStripMenuItem
+            // 
+            this.dynamicsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.envDteToolStripMenuItem});
+            this.dynamicsToolStripMenuItem.Name = "dynamicsToolStripMenuItem";
+            this.dynamicsToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.dynamicsToolStripMenuItem.Text = "Dynamics";
+            // 
+            // envDteToolStripMenuItem
+            // 
+            this.envDteToolStripMenuItem.Name = "envDteToolStripMenuItem";
+            this.envDteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.envDteToolStripMenuItem.Text = "EnvDte";
+            this.envDteToolStripMenuItem.Click += new System.EventHandler(this.envDteToolStripMenuItem_Click);
+            // 
             // UcMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -424,6 +442,8 @@
 		private System.Windows.Forms.ToolStripMenuItem iconToolStripMenuItem;
 		private System.Windows.Forms.ImageList imageList1;
 		private System.Windows.Forms.ToolStripMenuItem showRawJsonInLogsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dynamicsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem envDteToolStripMenuItem;
 	}
 }
 

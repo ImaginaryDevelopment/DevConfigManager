@@ -59,10 +59,14 @@
     <SignAssembly>true</SignAssembly>
     <SignManifests>true</SignManifests>
     <GenerateManifests>true</GenerateManifests>
-    <PublishUrl></PublishUrl>
-    <UpdateUrl></UpdateUrl>
-    <ManifestKeyFile></ManifestKeyFile>
-    <AssemblyOriginatorKeyFile></AssemblyOriginatorKeyFile>
+    <PublishUrl>
+    </PublishUrl>
+    <UpdateUrl>
+    </UpdateUrl>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
     <ManifestCertificateThumbprint>1418F8B289EAF5B5054006692AE274346CFB5FA3</ManifestCertificateThumbprint>
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\DebugSigned\</OutputPath>
@@ -124,6 +128,9 @@
     <ApplicationIcon>Settings.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.10\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -160,6 +167,12 @@
   <ItemGroup>
     <Compile Include="App_Start\NinjectConfig.cs" />
     <Compile Include="Controls\Interfaces\ICanHaveAnIcon.cs" />
+    <Compile Include="Controls\UcEnvDte.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UcEnvDte.Designer.cs">
+      <DependentUpon>UcEnvDte.cs</DependentUpon>
+    </Compile>
     <Compile Include="CrossCutting\DynamicDownload.cs" />
     <Compile Include="CrossCutting\Profiler.cs" />
     <Compile Include="Extensions\ControlExtensions.cs" />
@@ -270,6 +283,9 @@
     <EmbeddedResource Include="Controls\UcCrucible.resx">
       <DependentUpon>UcCrucible.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UcEnvDte.resx">
+      <DependentUpon>UcEnvDte.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\UcJira.resx">
       <DependentUpon>UcJira.cs</DependentUpon>
     </EmbeddedResource>
@@ -329,6 +345,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Domain.EnvDte\Domain.EnvDte.csproj">
+      <Project>{ce94c6c3-9c31-4829-bb29-ad49d5e9e0fa}</Project>
+      <Name>Domain.EnvDte</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domain.WebAdministration\Domain.WebAdministration.csproj">
       <Project>{1785cb45-7ff7-4e7b-a0f7-26f1eddbaa04}</Project>
       <Name>Domain.WebAdministration</Name>
@@ -360,22 +380,31 @@
     <EmbeddedResource Include="Changelog.txt" />
   </ItemGroup>
   <ItemGroup>
+    <PublishFile Include="Domain.EnvDte">
+      <Visible>False</Visible>
+      <Group>Domain.EnvDte</Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
     <PublishFile Include="Domain.WebAdministration">
       <Visible>False</Visible>
       <Group>Domain.WebAdministration</Group>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Microsoft.Web.Administration">
       <Visible>False</Visible>
       <Group>Domain.WebAdministration</Group>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>

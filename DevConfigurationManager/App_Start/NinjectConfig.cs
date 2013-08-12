@@ -5,13 +5,16 @@ using System.Configuration;
 using System.Linq.Expressions;
 using System.Reactive.Linq;
 using System.Windows.Forms;
+
 using DeveloperConfigurationManager.Controls;
 using DeveloperConfigurationManager.CrossCutting;
 using DeveloperConfigurationManager.Properties;
+
 using Domain.Adapters;
 using Domain.Extensions;
 using Domain.Helpers;
 using Domain.Models;
+
 using Ninject;
 
 namespace DeveloperConfigurationManager
@@ -37,9 +40,9 @@ namespace DeveloperConfigurationManager
 
 		static void RegisterSettingsServices()
 		{
-			const string SharedSecret = "atlassian";
+			const string sharedSecret = "atlassian";
 
-			var encryption = new Encryption(SharedSecret);
+			var encryption = new Encryption(sharedSecret);
 			
 			BindSetting(s => s.AtlassianUserName);
 			BindSetting(s => s.CrucibleAuthority);
@@ -97,12 +100,16 @@ namespace DeveloperConfigurationManager
 				.WithConstructorArgument("links", Settings.Default.GetLinks());
 		}
 
+        /// <summary>
+        /// Setup for defining how a control could get a reference to calling a dynamic download assembly without eagerly triggering it.
+        /// </summary>
 		static void RegisterDynamicAssemblies()
 		{
 			Kernel.Bind<DynamicDownload>().ToSelf().InSingletonScope(); //this should never run twice
 			var dd=Kernel.Get<DynamicDownload>(); 
 
 			Kernel.Bind<Func<string, IAdministerIIS>>().ToMethod(context => s => new IISAdministration(s));
+		    Kernel.Bind<Func<Domain.EnvDte.Dte>>().ToMethod(context => () => new Domain.EnvDte.Dte());
 		}
 
 		static void RegisterCrossCuttings()
@@ -113,6 +120,10 @@ namespace DeveloperConfigurationManager
 
 		}
 
+        /// <summary>
+        /// Defines conventional bindings for user settings allowing a constructor to require:
+        /// just the value, the getter and setter, and/or a notifier about value changes.
+        /// </summary>
 		static void BindSettingByConvention<T>(
 			this IKernel kernel,
 			T settingsStore,

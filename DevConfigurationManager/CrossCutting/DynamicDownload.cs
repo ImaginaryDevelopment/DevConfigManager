@@ -17,11 +17,12 @@ namespace DeveloperConfigurationManager.CrossCutting
 		// Maintain a dictionary mapping DLL names to download file groups. This is trivial for this sample, 
 		// but will be important in real-world applications where a feature is spread across multiple DLLs, 
 		// and you want to download all DLLs for that feature in one shot. 
-		Dictionary<String, String> DllMapping = new Dictionary<String, String>();
+        readonly Dictionary<String, String> _dllMapping = new Dictionary<String, String>();
 
 		public DynamicDownload()
 		{
-			DllMapping["Domain.WebAdministration"] = "Domain.WebAdministration";
+			_dllMapping["Domain.WebAdministration"] = "Domain.WebAdministration";
+		    _dllMapping["Domain.EnvDte"] = "Domain.EnvDte";
 			AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
 		}
 
@@ -38,7 +39,7 @@ namespace DeveloperConfigurationManager.CrossCutting
 
 			var nameParts = args.Name.Split(',');
 			var dllName = nameParts[0];
-			string downloadGroupName = DllMapping[dllName];
+			string downloadGroupName = _dllMapping[dllName];
 			try
 			{
 				deploy.DownloadFileGroup(downloadGroupName);

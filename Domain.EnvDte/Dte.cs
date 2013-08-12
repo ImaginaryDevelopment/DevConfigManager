@@ -6,23 +6,29 @@ using System.Threading.Tasks;
 
 namespace Domain.EnvDte
 {
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
-
     using EnvDTE;
 
     public class Dte
     {
         // ReSharper disable once UnusedMember.Local
         const string SolutionExplorerWindow = "{3AE79031-E1BC-11D0-8F78-00A0C9110057}";
+
         // ReSharper disable once UnusedMember.Local
         const string SolutionFolder = "{66A26720-8FB5-11D2-AA7E-00C04F688DDE}";
 
-        readonly EnvDTE.DTE _dte;
+        // ReSharper disable once UnusedMember.Local
+        const string ProjectGuid = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}";
+
+        readonly DTE _dte;
+
         public Dte()
         {
-            _dte = (EnvDTE.DTE)Marshal.GetActiveObject("VisualStudio.DTE");
+            _dte = (DTE)Marshal.GetActiveObject("VisualStudio.DTE");
             if (_dte == null) throw new InvalidOperationException("Could not get a DTE");
         }
+
         public object GetDisplay(UIHierarchyItem item)
         {
             object display = item.ToString();
@@ -50,6 +56,18 @@ namespace Domain.EnvDte
             }
             return display;
         }
+
+        public string GetSlnName()
+        {
+            return _dte.Solution.FileName;
+        }
+
+        public IEnumerable<DteCommand> GetCommands()
+        {
+            return _dte.Commands.Cast<Command>()
+                .Select(c => new DteCommand(c.ID, c.LocalizedName, ((object[]) c.Bindings).Cast<string>().ToArray())).ToArray();
+        }
+
         public IEnumerable<UIHierarchyItem> GetChildItems(UIHierarchyItem parent, bool topdown)
         {
 
@@ -64,6 +82,7 @@ namespace Domain.EnvDte
                         yield return item;
                 }
         }
+
         public void UnloadProjects(bool topdown = false)
         {
 
@@ -84,8 +103,7 @@ namespace Domain.EnvDte
                     continue;
                 }
 
-                //var comType = ComHelper.GetTypeName(uiProject.Object);
-
+               
                 uiProject.Select(vsUISelectionType.vsUISelectionTypeSelect);
 
                 try
@@ -95,6 +113,7 @@ namespace Domain.EnvDte
                 }
                 catch (COMException ex)
                 {
+                    Trace.WriteLine(ex);
                     if (object.ReferenceEquals(uiProject.Object, uiProject) == false) //assume project is already unloaded
                     {
                         failures.Add(display);
@@ -102,6 +121,36 @@ namespace Domain.EnvDte
 
                 }
             }
+        }
+
+        public void SuspendResharper()
+        {
+            _dte.ExecuteCommand("ReSharper_Suspend");
+        }
+
+        public UIHierarchyItem GetSolutionItem()
+        {
+            _dte.Windows.Item(SolutionExplorerWindow).Activate();
+            var uih = _dte.ActiveWindow.Object as UIHierarchy;
+            var solutionItem = uih.UIHierarchyItems.Cast<UIHierarchyItem>().Single();
+            return solutionItem;
+        }
+
+        public IEnumerable<Project> GetProjects(bool topdown = false)
+        {
+            var solutionItem = GetSolutionItem();
+            var q = from uiItem in GetChildItems(solutionItem, topdown)
+                let project = uiItem.Object as Project
+                where project != null && project.Kind == ProjectGuid
+                //select new { project.FullName, project.FileName, project.UniqueName };
+                select project;
+            return q;
+        }
+
+        public IEnumerable<UIHierarchyItem> GetChildren(UIHierarchyItem parentUi)
+        {
+            foreach (var c in parentUi.UIHierarchyItems.Cast<UIHierarchyItem>())
+                yield return c;
         }
     }
 }

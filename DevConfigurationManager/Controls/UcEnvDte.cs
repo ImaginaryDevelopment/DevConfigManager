@@ -1,27 +1,26 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Domain.EnvDte;
+using Domain.Extensions;
 using Domain.Helpers;
 
-namespace PayspanConfigurationManager.Controls
+namespace DeveloperConfigurationManager.Controls
 {
-	using System.Collections;
-	using System.Collections.Generic;
-	using System.Text.RegularExpressions;
-
-	using Domain.Extensions;
-
-	public partial class UcEnvDte : UserControl
+    public partial class UcEnvDte : UserControl
 	{
 		const string _expandme = "expandme";
 
-		readonly Lazy<Domain.EnvDte.Dte> _envDte;
+		readonly Lazy<Dte> _envDte;
 
 		IEnumerable _data;
 
-		public UcEnvDte(Lazy<Domain.EnvDte.Dte> envDte)
+		public UcEnvDte(Func<Dte> envDte)
 		{
-			_envDte = envDte;
+			_envDte =new Lazy<Dte>(envDte);
 			InitializeComponent();
 			
 		}
@@ -45,7 +44,7 @@ namespace PayspanConfigurationManager.Controls
 
 		private void BtnCommandsClick(object sender, EventArgs e)
 		{
-			this._data = _envDte.Value.GetDetailedCommands().ToArray();
+			this._data = _envDte.Value.GetCommands().ToArray();
 			
 			dataGridView1.DataSource = this._data;
 
@@ -54,7 +53,7 @@ namespace PayspanConfigurationManager.Controls
 
 		void FilterDataGrid(string column, string filter)
 		{
-			if (dataGridView1.Tag != null && (column.IsNullOrEmpty() || filter.IsNullOrEmpty()))
+			if (dataGridView1.Tag != null && (Domain.Extensions.StringExtensions.IsNullOrEmpty(column) || Domain.Extensions.StringExtensions.IsNullOrEmpty(filter)))
 			{
 					dataGridView1.DataSource = this._data;
 					return;
@@ -67,7 +66,7 @@ namespace PayspanConfigurationManager.Controls
 			var enumType = this._data.GetType().GetEnumerableType();
 			
 			IEnumerable<object> filtered = dataDyn;
-			if (column.IsNullOrEmpty() == false && filter.IsNullOrEmpty() == false)
+			if (Domain.Extensions.StringExtensions.IsNullOrEmpty(column) == false && Domain.Extensions.StringExtensions.IsNullOrEmpty(filter) == false)
 			{
 				var property = enumType.GetProperty(column);
 				if (property == null) { return; }
@@ -82,7 +81,7 @@ namespace PayspanConfigurationManager.Controls
 
 				}
 			}
-			var nameProp = enumType.GetProperty(LinqOp.PropertyOf<Domain.EnvDte.CommandDetail>(cd => cd.LocalizedName).Name);
+            var nameProp = enumType.GetProperty(LinqOp.PropertyOf<Domain.EnvDte.DteCommand>(cd => cd.LocalizedName).Name);
 			if (ckNameless.Checked == false && nameProp != null) filtered = filtered.Where(f => string.IsNullOrEmpty((string)nameProp.GetValue(f)) == false);
 			var bindingsProp = enumType.GetProperty(commandDetailBindingsName);
 			if (ckNoBindings.Checked == false && bindingsProp != null)
@@ -113,7 +112,7 @@ namespace PayspanConfigurationManager.Controls
 		}
 
 
-		static readonly string commandDetailBindingsName = LinqOp.PropertyOf<Domain.EnvDte.CommandDetail>(cd => cd.Bindings).Name;
+		static readonly string commandDetailBindingsName = LinqOp.PropertyOf<DteCommand>(cd => cd.Bindings).Name;
 		
 		private void DataGridView1CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
 		{
