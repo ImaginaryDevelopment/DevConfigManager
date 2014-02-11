@@ -25,6 +25,9 @@ namespace DeveloperConfigurationManager.Controls
 		readonly AccessorHelper<string> _atlassianUserNameAccessor;
 
 		readonly AccessorHelper<string> _atlassianPasswordAccessor;
+
+        readonly AccessorHelper<string> _junctionRelativePathAccessor;
+
         private readonly IDictionary<Type,Lazy<Control>> _dynamicChildren;
 
         readonly Profiler _profiler;
@@ -48,6 +51,7 @@ namespace DeveloperConfigurationManager.Controls
 			ObservableCollection<string> configXmlUris,
 			AccessorHelper<string> atlassianUserNameAccessor,
 			AccessorHelper<string> atlassianPasswordAccessor,
+            AccessorHelper<string> junctionRelativeGitPathAccessor,
 			IEnumerable<Control> children,
             IDictionary<Type,Lazy<Control>> dynamicChildren,
             Profiler profiler,
@@ -64,7 +68,7 @@ namespace DeveloperConfigurationManager.Controls
 				AddTabPage(child);
 
 			}
-
+            _junctionRelativePathAccessor = junctionRelativeGitPathAccessor;
 			this._atlassianUserNameAccessor = atlassianUserNameAccessor;
 			this._atlassianPasswordAccessor = atlassianPasswordAccessor;
 		    _dynamicChildren = dynamicChildren;
@@ -97,9 +101,12 @@ namespace DeveloperConfigurationManager.Controls
 			Settings.Default.ToObservablePropertyChanged()
 				.Where(s => s == LinqOp.PropertyOf(() => Settings.Default.GitPath).Name)
 				.SubscribeOn(SynchronizationContext.Current).Subscribe(_ => miGitPath.Text = Settings.Default.GitPath);
+
 			Settings.Default.ToObservablePropertyChanged().Where(
 				s => s == LinqOp.PropertyOf(() => Settings.Default.Servers).Name).SubscribeOn(
 					SynchronizationContext.Current).Subscribe(_ => this.InitializeServerStoreMenu(servers));
+
+            
 
 			miGitPath.Text = Settings.Default.GitPath;
 
@@ -229,6 +236,7 @@ namespace DeveloperConfigurationManager.Controls
 
 		void GitToolStripMenuItemClick(object sender, EventArgs e)
 		{
+                
 			string path;
 			using (var ofd = new OpenFileDialog())
 			{
@@ -403,5 +411,22 @@ namespace DeveloperConfigurationManager.Controls
             
         }
 
+        private void junctionRelativePathTargetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string path;
+            using (var ofd = new FolderBrowserDialog())
+            {
+                ofd.SelectedPath = "C:\\";
+                
+                
+                ofd.Description= "Please locate your git versioned folder";
+                if (ofd.ShowDialog(this) != DialogResult.OK)
+                    return;
+                //TODO: change this so that if it is a relative path off junction, we adjust it accordingly
+                path = Path.GetFullPath(ofd.SelectedPath);
+            }
+            _junctionRelativePathAccessor.Setter(path);
+            
+        }
 	}
 }

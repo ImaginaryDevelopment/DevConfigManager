@@ -46,7 +46,7 @@
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="JunctionRelativeGitPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">LOANQUEST ORIGINATION</Value>
+      <Value Profile="(Default)">config</Value>
     </Setting>
   </Settings>
 </SettingsFile>

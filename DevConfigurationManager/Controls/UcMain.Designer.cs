@@ -50,6 +50,8 @@
             this.textIconToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iconToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showRawJsonInLogsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dynamicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.envDteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.whereAmIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,8 +66,7 @@
             this.tpLinks = new System.Windows.Forms.TabPage();
             this.flpLinks = new System.Windows.Forms.FlowLayoutPanel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.dynamicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.envDteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.junctionRelativePathTargetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tbGrid.SuspendLayout();
@@ -117,20 +118,20 @@
             // 
             this.mnuSave.Enabled = false;
             this.mnuSave.Name = "mnuSave";
-            this.mnuSave.Size = new System.Drawing.Size(152, 22);
+            this.mnuSave.Size = new System.Drawing.Size(123, 22);
             this.mnuSave.Text = "&Save";
             // 
             // mnuSaveAs
             // 
             this.mnuSaveAs.Enabled = false;
             this.mnuSaveAs.Name = "mnuSaveAs";
-            this.mnuSaveAs.Size = new System.Drawing.Size(152, 22);
+            this.mnuSaveAs.Size = new System.Drawing.Size(123, 22);
             this.mnuSaveAs.Text = "Save &As...";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             // 
             // editToolStripMenuItem
@@ -144,7 +145,7 @@
             // refreshToolStripMenuItem
             // 
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
             this.refreshToolStripMenuItem.Text = "Refresh";
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.RefreshToolStripMenuItemClick);
             // 
@@ -157,7 +158,8 @@
             this.gitToolStripMenuItem,
             this.junctionStoreToolStripMenuItem,
             this.tabTitlesToolStripMenuItem,
-            this.showRawJsonInLogsToolStripMenuItem});
+            this.showRawJsonInLogsToolStripMenuItem,
+            this.junctionRelativePathTargetToolStripMenuItem});
             this.pathsToolStripMenuItem.Name = "pathsToolStripMenuItem";
             this.pathsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.pathsToolStripMenuItem.Text = "Settings";
@@ -165,20 +167,20 @@
             // atlassianLoginToolStripMenuItem
             // 
             this.atlassianLoginToolStripMenuItem.Name = "atlassianLoginToolStripMenuItem";
-            this.atlassianLoginToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.atlassianLoginToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
             this.atlassianLoginToolStripMenuItem.Text = "Atlassian Login";
             this.atlassianLoginToolStripMenuItem.Click += new System.EventHandler(this.AtlassianLoginToolStripMenuItemClick);
             // 
             // configXmlStoreToolStripMenuItem
             // 
             this.configXmlStoreToolStripMenuItem.Name = "configXmlStoreToolStripMenuItem";
-            this.configXmlStoreToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.configXmlStoreToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
             this.configXmlStoreToolStripMenuItem.Text = "ConfigXmlStore";
             // 
             // serverStoreToolStripMenuItem
             // 
             this.serverStoreToolStripMenuItem.Name = "serverStoreToolStripMenuItem";
-            this.serverStoreToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.serverStoreToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
             this.serverStoreToolStripMenuItem.Text = "DatabaseServerStore";
             // 
             // gitToolStripMenuItem
@@ -186,7 +188,7 @@
             this.gitToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miGitPath});
             this.gitToolStripMenuItem.Name = "gitToolStripMenuItem";
-            this.gitToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.gitToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
             this.gitToolStripMenuItem.Text = "Git.exe";
             this.gitToolStripMenuItem.Click += new System.EventHandler(this.GitToolStripMenuItemClick);
             // 
@@ -200,7 +202,7 @@
             // junctionStoreToolStripMenuItem
             // 
             this.junctionStoreToolStripMenuItem.Name = "junctionStoreToolStripMenuItem";
-            this.junctionStoreToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.junctionStoreToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
             this.junctionStoreToolStripMenuItem.Text = "JunctionStore";
             // 
             // tabTitlesToolStripMenuItem
@@ -210,7 +212,7 @@
             this.textIconToolStripMenuItem,
             this.iconToolStripMenuItem});
             this.tabTitlesToolStripMenuItem.Name = "tabTitlesToolStripMenuItem";
-            this.tabTitlesToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.tabTitlesToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
             this.tabTitlesToolStripMenuItem.Text = "Tab Titles";
             // 
             // textToolStripMenuItem
@@ -234,9 +236,24 @@
             // showRawJsonInLogsToolStripMenuItem
             // 
             this.showRawJsonInLogsToolStripMenuItem.Name = "showRawJsonInLogsToolStripMenuItem";
-            this.showRawJsonInLogsToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.showRawJsonInLogsToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
             this.showRawJsonInLogsToolStripMenuItem.Text = "Show Raw Json in Logs";
             this.showRawJsonInLogsToolStripMenuItem.Click += new System.EventHandler(this.showRawJsonInLogsToolStripMenuItem_Click);
+            // 
+            // dynamicsToolStripMenuItem
+            // 
+            this.dynamicsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.envDteToolStripMenuItem});
+            this.dynamicsToolStripMenuItem.Name = "dynamicsToolStripMenuItem";
+            this.dynamicsToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.dynamicsToolStripMenuItem.Text = "Dynamics";
+            // 
+            // envDteToolStripMenuItem
+            // 
+            this.envDteToolStripMenuItem.Name = "envDteToolStripMenuItem";
+            this.envDteToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.envDteToolStripMenuItem.Text = "EnvDte";
+            this.envDteToolStripMenuItem.Click += new System.EventHandler(this.envDteToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -369,20 +386,12 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // dynamicsToolStripMenuItem
+            // junctionRelativePathTargetToolStripMenuItem
             // 
-            this.dynamicsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.envDteToolStripMenuItem});
-            this.dynamicsToolStripMenuItem.Name = "dynamicsToolStripMenuItem";
-            this.dynamicsToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
-            this.dynamicsToolStripMenuItem.Text = "Dynamics";
-            // 
-            // envDteToolStripMenuItem
-            // 
-            this.envDteToolStripMenuItem.Name = "envDteToolStripMenuItem";
-            this.envDteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.envDteToolStripMenuItem.Text = "EnvDte";
-            this.envDteToolStripMenuItem.Click += new System.EventHandler(this.envDteToolStripMenuItem_Click);
+            this.junctionRelativePathTargetToolStripMenuItem.Name = "junctionRelativePathTargetToolStripMenuItem";
+            this.junctionRelativePathTargetToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+            this.junctionRelativePathTargetToolStripMenuItem.Text = "JunctionRelativePathTarget";
+            this.junctionRelativePathTargetToolStripMenuItem.Click += new System.EventHandler(this.junctionRelativePathTargetToolStripMenuItem_Click);
             // 
             // UcMain
             // 
@@ -444,6 +453,7 @@
 		private System.Windows.Forms.ToolStripMenuItem showRawJsonInLogsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dynamicsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem envDteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem junctionRelativePathTargetToolStripMenuItem;
 	}
 }
 

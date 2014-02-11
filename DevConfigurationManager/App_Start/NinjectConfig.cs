@@ -57,6 +57,7 @@ namespace DeveloperConfigurationManager
 			Kernel.BindSettingByConvention(Settings.Default, c => c.Junctions);
 			Kernel.BindSettingByConvention(Settings.Default, s => s.Servers);
 			Kernel.BindSettingByConvention(Settings.Default, s => s.Links);
+            
 		}
 
 		static void BindSetting(Expression<Func<Settings, string>> selector)
@@ -120,8 +121,6 @@ namespace DeveloperConfigurationManager
 		static void RegisterCrossCuttings()
 		{
 			Kernel.Bind<Profiler>().ToSelf().InSingletonScope().WithConstructorArgument("name", string.Empty);
-
-
 
 		}
 

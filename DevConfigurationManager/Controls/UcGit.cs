@@ -42,14 +42,18 @@ namespace DeveloperConfigurationManager.Controls
 
 		async Task<Git.StatusStreamOuts> GetStatus()
 		{
+            btnStatus.Enabled = false;
+            
 		    var git = new Git(Properties.Settings.Default.GitPath);
             var result = await this.Run(git.CheckStatus);
+            btnStatus.Enabled = true;
 			if (result == null) return null;
 			int length = rtLog.InvokeSafe(s => s.TextLength);
 			var newText = result.ToString().Replace("\\r\\n", Environment.NewLine).Replace("\\\"", "\"").Replace("\\t", "\t");
 			rtLog.InvokeSafeAppend(newText);
 			Refreshed = DateTime.Now;
 			Status = "Refreshed at " + Refreshed;
+            
 			if (result.Branch.Length < 1)
 			{
 				return result;
@@ -108,6 +112,8 @@ namespace DeveloperConfigurationManager.Controls
 				{
 					_cts.Token.Register(() => Domain.Adapters.Process.Kill("ssh.exe", new CancellationToken())); //the kill spawned processes should not cancel
 					_cts.Token.Register(() => Domain.Adapters.Process.Kill("git.exe", new CancellationToken())); //the kill spawned processes should not cancel
+                    if (System.IO.Directory.Exists(GitTargetPath) == false)
+                        throw new System.IO.DirectoryNotFoundException();
                     result = await func(GitTargetPath, _cts.Token);
 				}
 			}
