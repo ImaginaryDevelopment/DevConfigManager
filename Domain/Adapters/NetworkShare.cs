@@ -21,7 +21,7 @@ namespace Domain.Adapters
             {
                 return absolutePath;
             }
-            
+           
 			var drive = absolutePath.Before(":\\");
 			var relativePath = absolutePath.After(":\\");
 			return string.Format(@"\\{0}\{1}$\{2}", _server, drive, relativePath);
