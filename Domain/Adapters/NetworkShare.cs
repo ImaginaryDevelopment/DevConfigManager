@@ -17,6 +17,11 @@ namespace Domain.Adapters
 
 		public string TranslateToNetworkPath(string absolutePath)
 		{
+            if (absolutePath.StartsWith("\\\\")) //would check for having _server but perhaps this is a case of iis bound to multiple host names?
+            {
+                return absolutePath;
+            }
+            
 			var drive = absolutePath.Before(":\\");
 			var relativePath = absolutePath.After(":\\");
 			return string.Format(@"\\{0}\{1}$\{2}", _server, drive, relativePath);
