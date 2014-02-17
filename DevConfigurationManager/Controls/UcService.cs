@@ -55,14 +55,14 @@ namespace DeveloperConfigurationManager.Controls
 		void FilterData()
 		{
 
-			if (StringExtensions.IsNullOrEmpty(txtFilter.Text))
+			if (txtFilter.Text.IsNullOrEmpty())
 			{
 				dgServiceList.DataSource = _queryResults.ToList();
 				return;
 			}
 
 			var filter = txtFilter.Text;
-			if (StringExtensions.IsNullOrEmpty(cbFilterColumn.Text) || cbFilterColumn.Text == LinqOp.PropertyOf(() => _queryResults.First().ServiceName).Name)
+			if (cbFilterColumn.Text.IsNullOrEmpty() || cbFilterColumn.Text == LinqOp.PropertyOf(() => _queryResults.First().ServiceName).Name)
 			{
 				if (filter.Contains("^") || filter.Contains("?"))
 				{
@@ -133,7 +133,7 @@ namespace DeveloperConfigurationManager.Controls
 		}
 		async Task<StreamOuts> RunAction(string server, string action, string serviceName)
 		{
-			if (StringExtensions.IsNullOrEmpty(action)) return null;
+			if (action.IsNullOrEmpty()) return null;
 			tabControl1.SelectTab(tbLog);
 			var result = RunAction(ct => Sc.Run(server, action, serviceName, ct));
 			return await result;
@@ -178,12 +178,13 @@ namespace DeveloperConfigurationManager.Controls
 
 		void StyleServiceName(int rowIndex)
 		{
-			var specialServices = new[] { "WMSVC", "WAS", "W3SVC", "MsDepSvc".ToUpperInvariant() };
+            
 			var row = dgServiceList.Rows[rowIndex];
 			var cell = row.Cells["ServiceName"];
 
-			if (cell.Value != null && specialServices.Contains(cell.Value.ToString().ToUpperInvariant()))
+			if (cell.Value != null && IIS.IsServiceIisRelated (cell.Value.ToString()))
 				cell.Style.ForeColor = Color.Blue;
+            
 		}
 
 		private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
@@ -208,7 +209,11 @@ namespace DeveloperConfigurationManager.Controls
 			if (_queryResults.Any())
 
 			{
-				dgServiceList.DataSource = _queryResults.ToList();
+                var results=_queryResults.ToList();
+
+			    var missing = IIS.FindMissingExpectedIisServices(results.Select(r => r.ServiceName)).ToArray();
+                richTextBox1.InvokeSafeAppend("Missing services:"+missing.Delimit(","));
+			    dgServiceList.DataSource = results;
 				cbFilterColumn.DataSource = _queryResults.GetType().GetEnumerableType().GetProperties().Select(p => p.Name).ToList();
 			}
 			Refreshed = DateTime.Now;
