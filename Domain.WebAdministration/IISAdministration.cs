@@ -92,14 +92,16 @@
 				() =>
 					{
 						using (var iis = ServerManager.OpenRemote(this._server))
-						{
+						{ //can join iis.workerprocesses to pool name to get PID
 							var q = from site in iis.Sites
 							        let appName = site.Name
 							        from app in site.Applications
 							        let appPath = app.Path
 							        let pool = app.ApplicationPoolName
 							        let vd = app.VirtualDirectories.Where(v => v.Path != null)
-							        let virtuals = vd.Select(v => new IisVirtualInfo(v.Path, v.PhysicalPath, v.PhysicalPath, exists: null))
+                                    let wp = iis.WorkerProcesses.FirstOrDefault(wp=>wp.AppPoolName==pool)
+                                    let pid=wp!=null?(int?)wp.ProcessId:null
+							        let virtuals = vd.Select(v => new IisVirtualInfo(v.Path, v.PhysicalPath, v.PhysicalPath,pid, exists: null))
 							        select new IisAppInfo(appName + appPath, appPath, pool, virtuals);
 							return q.ToArray().AsEnumerable();
 							

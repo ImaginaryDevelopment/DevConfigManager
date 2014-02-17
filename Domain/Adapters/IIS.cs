@@ -56,7 +56,7 @@
 					  let pool = app.GetAttribValOrNull("applicationPool")
 					  let vd = app.XPathSelectElements("virtualDirectory[@path]")
 					  let virtuals = vd.Select(v => new { VirDir = v.Attribute(XNamespace.None + "path").Value, PhysicalPath = v.Attribute(XNamespace.None + "physicalPath").Value })
-					  let xvirtuals = virtuals.Select(v => new IisVirtualInfo(v.VirDir, v.PhysicalPath, v.PhysicalPath, Directory.Exists(v.PhysicalPath)))
+					  let xvirtuals = virtuals.Select(v => new IisVirtualInfo(v.VirDir, v.PhysicalPath, v.PhysicalPath,null, Directory.Exists(v.PhysicalPath)))
 					  select new IisAppInfo(appName, appPath, pool, xvirtuals);
 			var allEntries = q.ToList();
 			return allEntries;

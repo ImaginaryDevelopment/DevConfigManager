@@ -221,6 +221,7 @@ namespace DeveloperConfigurationManager.Controls
 							             a.AppName,
 							             a.AppPath,
 							             a.Pool,
+                                         v.Pid,
 							             v.PhysicalPath,
 							             async value => await RunIisStream(ct => IIS.SetVDirPath(a.AppName, v.VirDir, value, ct)),
 							             v.VirDir,

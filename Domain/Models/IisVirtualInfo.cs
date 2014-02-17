@@ -4,7 +4,8 @@ namespace Domain.Models
 		readonly string _virDir;
 		readonly string _physicalPath;
 		readonly string _displayPhysicalPath;
-		readonly bool? _exists;
+	    private readonly int? _pid;
+	    readonly bool? _exists;
 
 		public string VirDir
 		{
@@ -26,12 +27,18 @@ namespace Domain.Models
 			get { return _exists; }
 		}
 
-		public IisVirtualInfo(string virDir, string physicalPath, string displayPhysicalPath, bool? exists)
+	    public int? Pid
+	    {
+	        get { return _pid; }
+	    }
+
+	    public IisVirtualInfo(string virDir, string physicalPath, string displayPhysicalPath,int? pid, bool? exists)
 		{
 			_virDir = virDir;
 			_physicalPath = physicalPath;
 			_displayPhysicalPath = displayPhysicalPath;
-			_exists = exists;
+		    _pid = pid;
+		    _exists = exists;
 		}
 	}
 }

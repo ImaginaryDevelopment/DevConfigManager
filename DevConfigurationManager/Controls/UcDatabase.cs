@@ -183,28 +183,37 @@ namespace DeveloperConfigurationManager.Controls
 			string userDbText = cbDatabase.InvokeSafeText();
 			cbDatabase.InvokeSafe(c => c.DataSource = null);
 			Debug.WriteLine("RefreshDatabases attempting");
-			using (p)
-			{
-				var dbInfo = p.GetDatabases().ToArray();
-				var additions = from db in dbInfo
-									 let verified = _verifiedDatabases.FirstOrDefault(v => db.Equals(v, StringComparison.CurrentCultureIgnoreCase))
-									 orderby verified != null, db
-									 select verified ?? db;
-				var additionsEnumerated = additions.ToArray();
-				_verifiedServers.AddIfMissing(cbServer.InvokeSafeText());
+            try
+            {
+                using (p)
+                {
+                    var dbInfo = p.GetDatabases().ToArray();
+                    var additions = from db in dbInfo
+                                    let verified = _verifiedDatabases.FirstOrDefault(v => db.Equals(v, StringComparison.CurrentCultureIgnoreCase))
+                                    orderby verified != null, db
+                                    select verified ?? db;
+                    var additionsEnumerated = additions.ToArray();
+                    _verifiedServers.AddIfMissing(cbServer.InvokeSafeText());
 
-				cbDatabase.InvokeSafe(c =>
-				{
-					c.DataSource = additionsEnumerated;
-					c.Text = userDbText;
-					c.ForeColor = _verifiedServers.Contains(userDbText, StringComparer.CurrentCultureIgnoreCase)
-										  ? Color.Blue
-										  : Color.Black;
-				});
+                    cbDatabase.InvokeSafe(c =>
+                    {
+                        c.DataSource = additionsEnumerated;
+                        c.Text = userDbText;
+                        c.ForeColor = _verifiedServers.Contains(userDbText, StringComparer.CurrentCultureIgnoreCase)
+                                              ? Color.Blue
+                                              : Color.Black;
+                    });
 
-				cbServer.InvokeSafe(c => c.ForeColor = Color.Blue);
-			}
-			Debug.WriteLine("RefreshDatabases finished");
+                    cbServer.InvokeSafe(c => c.ForeColor = Color.Blue);
+                }
+                Debug.WriteLine("RefreshDatabases finished");
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                
+            }
+			
 			//TODO: pre-populate from user memory and sort by user preferences?
 		}
 
@@ -222,32 +231,39 @@ namespace DeveloperConfigurationManager.Controls
 					c.DataSource = null;
 				}); //fires a text changed?
 			Debug.WriteLine("RefreshTables attempting");
-			using (p)
-			{
-				var tvInfo = p.GetTablesAndViews();
-				var additions = from tv in tvInfo.Select(tv => tv.SchemaName + "." + tv.TableName)
-									 let verified = _verifiedTables.Contains(tv, StringComparer.CurrentCultureIgnoreCase)
-									 orderby verified, tv
-									 select new { tv, verified };
-				var range = additions.ToArray();
-				cbDatabase.InvokeSafe(c => c.ForeColor = Color.Blue);
-				cbTable.InvokeSafe(
-					c =>
-					{
-						c.DataSource = range.Select(r => r.tv).ToArray();
-						c.Text = userText;
-						var rangeItem = range.FirstOrDefault(r => StringComparer.CurrentCultureIgnoreCase.Compare(r.tv, userText) == 0);
-						if (rangeItem == null)
-						{
-							c.ForeColor = Color.Red;
-						}
-						else
-						{
-							c.ForeColor = rangeItem.verified ? Color.Blue : Color.Black;
-						}
-					});
-			}
-			Debug.WriteLine("RefreshTables finished");
+            try
+            {
+                using (p)
+                {
+                    var tvInfo = p.GetTablesAndViews();
+                    var additions = from tv in tvInfo.Select(tv => tv.SchemaName + "." + tv.TableName)
+                                    let verified = _verifiedTables.Contains(tv, StringComparer.CurrentCultureIgnoreCase)
+                                    orderby verified, tv
+                                    select new { tv, verified };
+                    var range = additions.ToArray();
+                    cbDatabase.InvokeSafe(c => c.ForeColor = Color.Blue);
+                    cbTable.InvokeSafe(
+                        c =>
+                        {
+                            c.DataSource = range.Select(r => r.tv).ToArray();
+                            c.Text = userText;
+                            var rangeItem = range.FirstOrDefault(r => StringComparer.CurrentCultureIgnoreCase.Compare(r.tv, userText) == 0);
+                            if (rangeItem == null)
+                            {
+                                c.ForeColor = Color.Red;
+                            }
+                            else
+                            {
+                                c.ForeColor = rangeItem.verified ? Color.Blue : Color.Black;
+                            }
+                        });
+                }
+                Debug.WriteLine("RefreshTables finished");
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
 			// TODO: pre-populate from user memory and sort by user preferences?
 		}
 

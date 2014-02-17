@@ -6,7 +6,8 @@ namespace DeveloperConfigurationManager.Controls.Interfaces
 		readonly string _appName;
 		readonly string _appPath;
 		readonly string _pool;
-		string _physicalPath;
+	    readonly int? _pid;
+	    string _physicalPath;
 		readonly Action<string> _pathSetter;
 		readonly string _virDir;
 
@@ -48,13 +49,19 @@ namespace DeveloperConfigurationManager.Controls.Interfaces
 			}
 		}
 
-		public IisConfigModel(string appName, string appPath, string pool, string physicalPath,Action<string> pathSetter, string virDir,bool exists)
+	    public int? Pid
+	    {
+	        get { return _pid; }
+	    }
+
+	    public IisConfigModel(string appName, string appPath, string pool,int? pid, string physicalPath,Action<string> pathSetter, string virDir,bool exists)
 		{
 			
 			_appName = appName;
 			_appPath = appPath;
 			_pool = pool;
-			_physicalPath = physicalPath;
+		    _pid = pid;
+		    _physicalPath = physicalPath;
 			_pathSetter = pathSetter;
 			_virDir = virDir;
 			this._exists = exists;
