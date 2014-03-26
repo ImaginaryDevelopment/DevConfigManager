@@ -10,7 +10,10 @@ namespace Domain.Extensions
 
 		public static string Delimit(this IEnumerable<string> values, string delimiter)
 		{
-			return values.Aggregate((s1, s2) => s1 + delimiter + s2);
+		    var enumerated = values.ToArray();
+            if (enumerated.Any() == false)
+		        return string.Empty;
+            return enumerated.Aggregate((s1, s2) => s1 + delimiter + s2);
 		}
 
 		public static string EnsureStartsWith(this string src, string mayStartWith)
