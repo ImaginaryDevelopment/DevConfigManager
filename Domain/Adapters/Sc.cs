@@ -28,7 +28,7 @@ namespace Domain.Adapters
 
 		public static StreamingOuts Run(string server, string command, string service, CancellationToken ct)
 		{
-			return Domain.Adapters.Process.RunRedirectedObservable("sc", @"\\" + server + " " + command + " " + service, ct);
+			return Domain.Adapters.Process.RunRedirectedObservable("sc", @"\\" + server + " " + command + " \"" + service+"\"", ct);
 		}
 
 		public static IEnumerable<ScQueryOutput> TransformScQuery(string output)
